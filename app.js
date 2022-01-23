@@ -1,6 +1,7 @@
 // Get elements
 const grid = document.querySelector('.grid');
 const container = document.querySelector('container');
+const clear = document.getElementById('clear');
 
 // Set default size and color
 let selectedSize = 25;
@@ -24,4 +25,21 @@ const createGrid = size => {
     };
 };
 
+// Clear current grid and create new one with size based on prompt
+const handleClear = () => {
+    const gridPixels = grid.querySelectorAll('div');
+    gridPixels.forEach(gridPixel => {
+        gridPixel.style.backgroundColor = "#ffffff";
+    });
+
+    newSize = prompt("Enter a new size (for example, 16 = 16x16 grid");
+    if ((newSize > 100) || (newSize <= 0)) {
+        newSize = prompt("Invalid input. Please enter a size between 1 and 100.")
+    } else { 
+        selectedSize = newSize;
+        createGrid(selectedSize);
+    };
+};
+
 createGrid(selectedSize);
+clear.addEventListener('click', handleClear);
